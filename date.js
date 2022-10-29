@@ -2,25 +2,51 @@
 const yargs = require("yargs");
 const getDate = require("./getDate");
 
-yargs
-    .command({
-        command: "current",
-        describe: "Текущая дата",
-        handler(opt) {
-            if (opt.y) {
-                getDate.currentYear();
-            }
-            if (opt.m) {
-                getDate.currentMonth();
-            }
-            if (opt.d) {
-                getDate.currentDay();
-            }
-            if (!opt.y && !opt.m) {
-                getDate.currentDate();
-            }
+yargs.command({
+    command: "current",
+    describe: "Текущая дата",
+    handler(opt) {
+        if (opt.y) {
+            getDate.currentYear();
         }
-    })
+        if (opt.m) {
+            getDate.currentMonth();
+        }
+        if (opt.d) {
+            getDate.currentDay();
+        }
+        if (!opt.y && !opt.m && !opt.d) {
+            getDate.currentDate();
+        }
+    }
+});
+
+yargs.command({
+    command: "add",
+    describe: "Будущая дата",
+    handler(opt) {
+        if (opt.d && opt._[1]) {
+            getDate.addDays(opt._[1]);
+        }
+        if (opt.m && opt._[1]) {
+            getDate.addMonth(opt._[1]);
+        }
+    }
+});
+yargs.command({
+    command: "sub",
+    describe: "Прошедшая дата",
+    handler(opt) {
+        if (opt.d && opt._[1]) {
+            getDate.subDays(opt._[1]);
+        }
+        if (opt.m && opt._[1]) {
+            getDate.subMonth(opt._[1]);
+        }
+    }
+});
+
+yargs
     .option("year", {
         alias: "y",
         type: "boolean",
@@ -36,20 +62,5 @@ yargs
         type: "boolean",
         description: "Текущий день"
     });
-
-yargs.command({
-    command: "add",
-    describe: "Текущая дата",
-    handler() {
-        console.log(new Date());
-    }
-});
-yargs.command({
-    command: "sub",
-    describe: "Текущая дата",
-    handler() {
-        console.log(new Date());
-    }
-});
 
 yargs.parse();
