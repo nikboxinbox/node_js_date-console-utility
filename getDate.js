@@ -20,12 +20,22 @@ const addMonth = (num) => {
         new Date(date.setMonth(date.getMonth() + num)).toLocaleString()
     );
 };
+const addYears = (num) => {
+    console.log(
+        new Date(date.setYear(date.getFullYear() + num)).toLocaleString()
+    );
+};
 const subDays = (num) => {
     console.log(new Date(date.setDate(date.getDate() - num)).toLocaleString());
 };
 const subMonth = (num) => {
     console.log(
         new Date(date.setMonth(date.getMonth() - num)).toLocaleString()
+    );
+};
+const subYears = (num) => {
+    console.log(
+        new Date(date.setYear(date.getFullYear() - num)).toLocaleString()
     );
 };
 
@@ -37,5 +47,7 @@ module.exports = {
     addDays,
     addMonth,
     subDays,
-    subMonth
+    subMonth,
+    subYears,
+    addYears
 };
